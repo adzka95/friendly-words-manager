@@ -27,9 +27,13 @@ import {ModeTypes} from "../db/format"
 import {ListPage} from "../components/resources/ListPage"
 import {EmptyState} from "../libs/confy/components/ui/EmptyState"
 import {HeaderAction, HeaderButton} from "../libs/confy/components/ui/HeaderButton"
+import firebase from 'react-native-firebase';
 
 const ConfigurationsPage = ({history, configurations, allConfigs, activeMessage, searchQuery, onSearchChange, actions, isDeleteEnabled}) => {
-    const goToConfigCreator = () => history.push("/creator")
+    const goToConfigCreator = () => {
+        firebase.analytics().logEvent("Nazwa_darzenia");
+        history.push("/creator");
+    }
 
     return <ListPage onBack={() => history.goBack()} title={"Konfiguracje"} rightContent={<HeaderButton action={goToConfigCreator} text={"Utwórz"} />}>
         {R.isEmpty(allConfigs)
