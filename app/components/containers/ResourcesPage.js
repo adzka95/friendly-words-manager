@@ -10,9 +10,14 @@ import {Modal, onConfirm} from "../modal/Modal"
 import {deleteResource} from "../../redux/resources/actions"
 import {EmptyState} from "../../libs/confy/components/ui/EmptyState";
 import {HeaderButton} from "../../libs/confy/components/ui/HeaderButton";
+import firebase from "react-native-firebase";
+import {events} from "../firebase/Events";
 
 export const ResourcesPage = ({history, resources, isDeleteEnabled, actions, title, resourceName, ResourceBox}) => {
-    const goToResourceCreator = () => history.push(`/creator/resource/${resourceName}`)
+    const goToResourceCreator = () => {
+        firebase.analytics().logEvent(events.create_word);
+        history.push(`/creator/resource/${resourceName}`)
+    }
 
     return <ListPage onBack={() => history.goBack()} title={title}
                      rightContent={<HeaderButton action={goToResourceCreator} text={"Utwórz"}/>}>

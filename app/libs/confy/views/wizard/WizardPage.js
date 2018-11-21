@@ -28,7 +28,8 @@ const BaseWizardPage = ({name, onBack, children, onSave, config}) => (
     <Page>
         <PageHeader onBack={() => onBack()} header={name}>
             <HeaderButton text="Zapisz" action={() => Modal.textAsk("Podaj nazwę kroku", name).then(onConfirm(newName => {onSave(config, newName)
-                firebase.analytics().logEvent(events.save_configuration);}))} />
+
+            }))} />
         </PageHeader>
         {children}
     </Page>

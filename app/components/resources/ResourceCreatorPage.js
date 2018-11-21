@@ -6,6 +6,8 @@ import {connect} from "react-redux"
 import {createWizardPage} from "../../libs/confy/views/wizard/createWizardPage"
 import {Modal, onConfirm} from "../modal/Modal"
 import {addResource} from "../../redux/resources/actions"
+import firebase from "react-native-firebase";
+import {events} from "../firebase/Events";
 
 
 const ResourceCreatorPage = (ResourceView, resourceName) => ({history, saveResource, allNames}) => {
@@ -15,6 +17,7 @@ const ResourceCreatorPage = (ResourceView, resourceName) => ({history, saveResou
 
     const createSave = (name, data) => {
         saveResource({...data, name})
+        firebase.analytics().logEvent(events.save_word);
         goBack()
     }
     const onCreateSave = R.curry((data, name) => R.ifElse(
