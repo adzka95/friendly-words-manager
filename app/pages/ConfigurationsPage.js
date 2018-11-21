@@ -28,10 +28,11 @@ import {ListPage} from "../components/resources/ListPage"
 import {EmptyState} from "../libs/confy/components/ui/EmptyState"
 import {HeaderAction, HeaderButton} from "../libs/confy/components/ui/HeaderButton"
 import firebase from 'react-native-firebase';
+import {events} from "../components/firebase/Events";
 
 const ConfigurationsPage = ({history, configurations, allConfigs, activeMessage, searchQuery, onSearchChange, actions, isDeleteEnabled}) => {
     const goToConfigCreator = () => {
-        firebase.analytics().logEvent("Nazwa_darzenia");
+        firebase.analytics().logEvent(events.create_configuration);
         history.push("/creator");
     }
 
