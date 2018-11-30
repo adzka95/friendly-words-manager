@@ -6,7 +6,6 @@ export const events = {
     create_word:            "tworzenie_nowego_slowa",
     save_word:              "zapisywanie_nowego_slowa",
     change_tab_material:    "zmiana_zakladki_material",
-    change_tab_learning:    "zmiana_zakladki_sposob_uczenia",
     change_tab_strengthen:  "zmiana_zakladki_wzmocnienia",
     change_tab_test:        "zmiana_zakladki_test",
     change_tab_step_option: "zmiana_zakladki_ustawienia_kroku",

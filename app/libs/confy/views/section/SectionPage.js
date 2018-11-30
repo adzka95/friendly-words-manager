@@ -26,12 +26,25 @@ const sectionPageStyle = {
     }
 }
 
-const Section = ({children}) => (
-    <Content contentContainerStyle={sectionPageStyle.section}>
-        {children}
-    </Content>
-)
+const Section = ({children}) => {
 
+    switch (children.length) {
+        case 4:
+            firebase.analytics().logEvent(events.change_tab_step_option);
+            break;
+        case 1:
+            firebase.analytics().logEvent(events.change_tab_try_option);
+            break;
+        case 2:
+            firebase.analytics().logEvent(events.change_tab_tip_option);
+            break;
+    }
+    return (
+        <Content contentContainerStyle={sectionPageStyle.section}>
+            {children}
+        </Content>
+    )
+}
 const _SectionPage =
     ({sections, renderField, config, activeSectionIdx, activeSectionIdxChange}) =>
         <Grid style={sectionPageStyle.container}>
@@ -41,17 +54,7 @@ const _SectionPage =
                     return <View
                         style={[sectionPageStyle.sectionListItem, isActive && sectionPageStyle.activeSectionListItem]}
                         key={section.name}>
-                        <Text style={{fontSize: moderateScale(12)}} onPress={() => {
-                            activeSectionIdxChange(idx)
-                            switch (idx) {
-                                case 0:
-                                    return (firebase.analytics().logEvent(events.change_tab_step_option))
-                                case 1:
-                                    return (firebase.analytics().logEvent(events.change_tab_try_option))
-                                case 2:
-                                    return (firebase.analytics().logEvent(events.change_tab_tip_option))
-                            }
-                        }}>
+                        <Text style={{fontSize: moderateScale(12)}} onPress={() =>activeSectionIdxChange(idx)}>
                             {section.name}
                         </Text>
                     </View>
