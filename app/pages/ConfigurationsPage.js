@@ -31,9 +31,12 @@ import firebase from 'react-native-firebase';
 import {events} from "../components/firebase/Events";
 
 const ConfigurationsPage = ({history, configurations, allConfigs, activeMessage, searchQuery, onSearchChange, actions, isDeleteEnabled}) => {
+    firebase.analytics().setCurrentScreen("Menu konfiguracji");
+
     const goToConfigCreator = () => {
         firebase.analytics().logEvent(events.create_configuration);
         history.push("/creator");
+        firebase.analytics().setCurrentScreen("Tworzenie konfiguracji");
     }
 
     return <ListPage onBack={() => history.goBack()} title={"Konfiguracje"} rightContent={<HeaderButton action={goToConfigCreator} text={"Utwórz"} />}>
@@ -45,13 +48,15 @@ const ConfigurationsPage = ({history, configurations, allConfigs, activeMessage,
                     <ConfigElem key={config.id}
                                 item={config}
                                 active={activeMessage(config)}
-                                onOpen={() => history.push(`/creator/${config.id}`)}
-                    >
+                                onOpen={() => history.push(`/creator/${config.id}`)}>
                         <ActionsMenu>
                             <ActionItem onSelect={() => actions.duplicate(allConfigs, config)}>
                                 <Icon name="copy"/>
                             </ActionItem>
-                            <ActionItem onSelect={() => history.push(`/creator/${config.id}`)}>
+                            <ActionItem onSelect={() => {
+                                firebase.analytics().setCurrentScreen("Edytowanie konfiguracji");
+                                history.push(`/creator/${config.id}`)
+                            }}>
                                 <Icon name="create"/>
                             </ActionItem>
                             <ActionItem onSelect={() => actions.changeActiveConfig(config.id)}>

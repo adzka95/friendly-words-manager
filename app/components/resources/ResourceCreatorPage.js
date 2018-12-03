@@ -25,7 +25,7 @@ const ResourceCreatorPage = (ResourceView, resourceName) => ({history, saveResou
         () => Modal.ask(`Zasób o nazwie '${name}' już istnieje. Czy napewno chcesz go nadpisać?`, false).then(onConfirm(() => createSave(name, data))),
         () => createSave(name, data)
     )(allNames))
-
+    firebase.analytics().setCurrentScreen("Tworzenie zasobu");
     return <WizardPage name="Nowy zasób" onBack={goBack}
                        onSave={onCreateSave}/>
 }

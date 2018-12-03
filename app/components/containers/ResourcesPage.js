@@ -27,10 +27,16 @@ export const ResourcesPage = ({history, resources, isDeleteEnabled, actions, tit
             : <ResourceList>
                 {resources.map(resource =>
                     <ResourceElem key={resource.id} item={<ResourceBox item={resource}/>}
-                                  onElemClick={() => history.push(`/creator/resource/${resourceName}/${resource.id}`)}>
+                                  onElemClick={() => {
+                                      history.push(`/creator/resource/${resourceName}/${resource.id}`)
+                                      firebase.analytics().setCurrentScreen("Edytowanie zasobu");
+                                  }}>
                         <ActionsMenu>
                             <ActionItem
-                                onSelect={() => history.push(`/creator/resource/${resourceName}/${resource.id}`)}>
+                                onSelect={() => {
+                                    history.push(`/creator/resource/${resourceName}/${resource.id}`)
+                                    firebase.analytics().setCurrentScreen("Edytowanie zasobu");
+                                }}>
                                 <Icon name="create"/>
                             </ActionItem>
                             <ActionItem isEnabled={isDeleteEnabled} onSelect={() => actions.delete(resource)}>

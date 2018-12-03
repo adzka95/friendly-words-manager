@@ -10,7 +10,6 @@ export const events = {
     change_tab_test:        "zmiana_zakladki_test",
     change_tab_step_option: "zmiana_zakladki_ustawienia_kroku",
     change_tab_try_option:  "zmiana_zakladki_ustawienia_proby",
-    change_tab_tip_option:  "zmiana_zakladki_ustawienia_podpowiedzi",
-    flat: 'flat'
+    change_tab_tip_option:  "zmiana_zakladki_ustawienia_podpowiedzi"
 }
 
